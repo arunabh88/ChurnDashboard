@@ -150,28 +150,6 @@ function ModelBreakdown() {
             </div>
           </div>
 
-          <div className="factor-summary">
-            <div className="factor-total">
-              <span className="total-label">Total Factor Impact</span>
-              <span className="total-value">{total}%</span>
-            </div>
-            
-            <div className="top-factors">
-              <p className="factors-title">Top 3 Drivers</p>
-              {filteredFactors.slice(0, 3).map((factor, idx) => (
-                <div key={idx} className="factor-item">
-                  <div className="factor-bar">
-                    <div 
-                      className="factor-fill" 
-                      style={{ width: `${(factor.value / (filteredFactors[0]?.value || 100)) * 100}%`, backgroundColor: factor.color }}
-                    />
-                  </div>
-                  <span className="factor-name">{factor.factor}</span>
-                  <span className="factor-value">{factor.value}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="ai-commentary">
