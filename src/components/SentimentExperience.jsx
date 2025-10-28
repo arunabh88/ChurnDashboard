@@ -21,62 +21,68 @@ function SentimentExperience() {
     <div className="sentiment-experience">
       <h3 className="block-title">C. Sentiment & Service Experience</h3>
       
-      <div className="gauge-container">
-        <ResponsiveContainer width="100%" height={220}>
-          <RadialBarChart 
-            cx="50%" 
-            cy="50%" 
-            innerRadius="60%" 
-            outerRadius="90%" 
-            data={gaugeData}
-            startAngle={90} 
-            endAngle={450}
-          >
-            <RadialBar minAngle={15} dataKey="value" cornerRadius={10} />
-            <Legend 
-              content={() => (
-                <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                  <div style={{ fontSize: '36px', fontWeight: '700', color: '#1a1a1a' }}>
-                    62%
-                  </div>
-                  <div style={{ fontSize: '14px', color: '#6b7280', marginTop: '4px' }}>
-                    Sentiment Score
-                  </div>
-                  <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '8px' }}>
-                    ↓ 5 pts QoQ
-                  </div>
-                </div>
-              )}
-            />
-          </RadialBarChart>
-        </ResponsiveContainer>
+      <div className="sentiment-grid">
+        <div className="gauge-section">
+          <p className="section-label">Current Sentiment</p>
+          <div className="gauge-container">
+            <ResponsiveContainer width="100%" height={180}>
+              <RadialBarChart 
+                cx="50%" 
+                cy="50%" 
+                innerRadius="60%" 
+                outerRadius="90%" 
+                data={gaugeData}
+                startAngle={90} 
+                endAngle={450}
+              >
+                <RadialBar minAngle={15} dataKey="value" cornerRadius={10} />
+                <Legend 
+                  content={() => (
+                    <div style={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: '32px', fontWeight: '700', color: '#1a1a1a' }}>
+                        62%
+                      </div>
+                      <div style={{ fontSize: '13px', color: '#6b7280', marginTop: '2px' }}>
+                        Sentiment Score
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px' }}>
+                        ↓ 5 pts QoQ
+                      </div>
+                    </div>
+                  )}
+                />
+              </RadialBarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="trend-section">
+          <p className="section-label">Sentiment Trend (Last 6 Months)</p>
+          <ResponsiveContainer width="100%" height={180}>
+            <LineChart data={sentimentTrend}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+              <YAxis tick={{ fontSize: 10 }} domain={[55, 70]} />
+              <Tooltip />
+              <Line 
+                type="monotone" 
+                dataKey="score" 
+                stroke="#ef4444" 
+                strokeWidth={2}
+                dot={{ fill: '#ef4444', r: 3 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
       <div className="word-cloud">
+        <p className="cloud-label">Top Feedback Terms</p>
         <div className="word-tag">Pricing</div>
         <div className="word-tag">New Content</div>
         <div className="word-tag">Value</div>
         <div className="word-tag">Ads</div>
         <div className="word-tag">Support</div>
-      </div>
-
-      <div className="trend-chart">
-        <p className="trend-label">Sentiment Trend (Last 6 Months)</p>
-        <ResponsiveContainer width="100%" height={120}>
-          <LineChart data={sentimentTrend}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-            <YAxis tick={{ fontSize: 11 }} domain={[55, 70]} />
-            <Tooltip />
-            <Line 
-              type="monotone" 
-              dataKey="score" 
-              stroke="#ef4444" 
-              strokeWidth={2}
-              dot={{ fill: '#ef4444', r: 4 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
       </div>
 
       <div className="ai-insight">

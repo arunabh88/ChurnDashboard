@@ -2,18 +2,49 @@
   height: 100%;
 }
 
-.gauge-container {
-  background: white;
-  padding: 16px;
-  border-radius: 8px;
+.sentiment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
   margin: 16px 0;
 }
 
+.gauge-section, .trend-section {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gauge-container {
+  padding: 0;
+}
+
 .word-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   margin: 12px 0;
+}
+
+.cloud-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.word-cloud > .word-tag {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .word-tag {

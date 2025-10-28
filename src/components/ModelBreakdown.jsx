@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from 'recharts'
 import './ModelBreakdown.css'
 
 function ModelBreakdown() {
@@ -10,6 +10,14 @@ function ModelBreakdown() {
     { factor: 'Content Saturation', value: 13, color: '#8b5cf6' },
     { factor: 'Lack of Re-engagement', value: 8, color: '#10b981' },
   ]
+
+  const pieData = factors.map(f => ({
+    name: f.factor,
+    value: f.value,
+    color: f.color
+  }))
+
+  const total = factors.reduce((sum, f) => sum + f.value, 0)
 
   return (
     <section className="section model-breakdown">
@@ -34,6 +42,54 @@ function ModelBreakdown() {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
+        </div>
+
+        <div className="model-insights">
+          <div className="donut-chart-container">
+            <h3 className="chart-title-small">Factor Distribution</h3>
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, value }) => `${name}: ${value}%`}
+                  outerRadius={70}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="factor-summary">
+            <div className="factor-total">
+              <span className="total-label">Total Factor Impact</span>
+              <span className="total-value">{total}%</span>
+            </div>
+            
+            <div className="top-factors">
+              <p className="factors-title">Top 3 Drivers</p>
+              {factors.slice(0, 3).map((factor, idx) => (
+                <div key={idx} className="factor-item">
+                  <div className="factor-bar">
+                    <div 
+                      className="factor-fill" 
+                      style={{ width: `${(factor.value / factors[0].value) * 100}%`, backgroundColor: factor.color }}
+                    />
+                  </div>
+                  <span className="factor-name">{factor.factor}</span>
+                  <span className="factor-value">{factor.value}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="ai-commentary">

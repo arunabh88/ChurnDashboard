@@ -2,11 +2,47 @@
   height: 100%;
 }
 
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
 .heatmap-title {
   font-size: 18px;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 20px;
+  margin: 0;
+}
+
+.risk-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #d1d5db;
+  background: #f9fafb;
+}
+
+.filter-btn.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
 }
 
 .regions-list {
@@ -14,6 +50,13 @@
   flex-direction: column;
   gap: 16px;
   margin-bottom: 20px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-size: 14px;
 }
 
 .region-item {
