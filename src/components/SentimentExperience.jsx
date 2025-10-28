@@ -1,13 +1,9 @@
 import React from 'react'
-import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import './SentimentExperience.css'
 
 function SentimentExperience() {
-  const gaugeData = [
-    { name: 'Score', value: 62, fill: '#10b981' },
-    { name: 'Remaining', value: 38, fill: '#e5e7eb' },
-  ]
-
+  const sentimentScore = 62
   const sentimentTrend = [
     { month: 'Jan', score: 67 },
     { month: 'Feb', score: 66 },
@@ -17,6 +13,21 @@ function SentimentExperience() {
     { month: 'Jun', score: 62 },
   ]
 
+  // Calculate the percentage for the gauge
+  const percentage = (sentimentScore / 100) * 100
+  const circumference = 2 * Math.PI * 45 // radius of 45
+  const strokeDasharray = circumference
+  const strokeDashoffset = circumference - (percentage / 100) * circumference
+
+  // Determine color based on score
+  const getColor = (score) => {
+    if (score >= 70) return '#10b981'
+    if (score >= 50) return '#f59e0b'
+    return '#ef4444'
+  }
+
+  const sentimentColor = getColor(sentimentScore)
+
   return (
     <div className="sentiment-experience">
       <h3 className="block-title">C. Sentiment & Service Experience</h3>
@@ -25,34 +36,40 @@ function SentimentExperience() {
         <div className="gauge-section">
           <p className="section-label">Current Sentiment</p>
           <div className="gauge-container">
-            <ResponsiveContainer width="100%" height={180}>
-              <RadialBarChart 
-                cx="50%" 
-                cy="50%" 
-                innerRadius="60%" 
-                outerRadius="90%" 
-                data={gaugeData}
-                startAngle={90} 
-                endAngle={450}
-              >
-                <RadialBar minAngle={15} dataKey="value" cornerRadius={10} />
-                <Legend 
-                  content={() => (
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '32px', fontWeight: '700', color: '#1a1a1a' }}>
-                        62%
-                      </div>
-                      <div style={{ fontSize: '13px', color: '#6b7280', marginTop: '2px' }}>
-                        Sentiment Score
-                      </div>
-                      <div style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px' }}>
-                        ↓ 5 pts QoQ
-                      </div>
-                    </div>
-                  )}
+            <div className="sentiment-gauge">
+              <svg viewBox="0 0 120 60" style={{ width: '100%', height: 'auto', maxHeight: '160px' }}>
+                {/* Background semicircle */}
+                <path
+                  d="M 20 50 A 40 40 0 0 1 100 50"
+                  fill="none"
+                  stroke="#e5e7eb"
+                  strokeWidth="8"
+                  strokeLinecap="round"
                 />
-              </RadialBarChart>
-            </ResponsiveContainer>
+                {/* Value semicircle */}
+                <path
+                  d="M 20 50 A 40 40 0 0 1 100 50"
+                  fill="none"
+                  stroke={sentimentColor}
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeDasharray={strokeDasharray}
+                  strokeDashoffset={strokeDashoffset}
+                  style={{ transition: 'all 0.3s ease' }}
+                  transform="rotate(-90 60 50)"
+                />
+              </svg>
+              <div className="gauge-content">
+                <div className="gauge-value">{sentimentScore}%</div>
+                <div className="gauge-label">Sentiment Score</div>
+                <div className="gauge-change">↓ 5 pts QoQ</div>
+              </div>
+            </div>
+            <div className="gauge-status">
+              <span className={`status-badge status-${sentimentScore >= 70 ? 'positive' : sentimentScore >= 50 ? 'warning' : 'negative'}`}>
+                {sentimentScore >= 70 ? 'Positive' : sentimentScore >= 50 ? 'Moderate' : 'Critical'}
+              </span>
+            </div>
           </div>
         </div>
 
