@@ -29,19 +29,42 @@ function ModelBreakdown() {
       <div className="model-content">
         <div className="factors-chart">
           <h3 className="chart-title">Aggregated Factors</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={factors} layout="horizontal">
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis type="number" tick={{ fontSize: 12 }} />
-              <YAxis dataKey="factor" type="category" tick={{ fontSize: 12 }} width={150} />
-              <Tooltip />
-              <Bar dataKey="value">
-                {factors.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="factor-cards-grid">
+            {factors.map((factor, index) => {
+              const percentage = (factor.value / 50) * 100
+              return (
+                <div key={index} className="factor-card">
+                  <div className="factor-card-header">
+                    <div className="factor-icon-wrapper" style={{ backgroundColor: factor.color + '20' }}>
+                      <span className="factor-rank">#{index + 1}</span>
+                    </div>
+                    <div className="factor-info">
+                      <div className="factor-name-card">{factor.factor}</div>
+                      <div className="factor-percentage">{factor.value}% Impact</div>
+                    </div>
+                  </div>
+                  <div className="factor-progress-wrapper">
+                    <div className="factor-progress-bar">
+                      <div 
+                        className="factor-progress-fill" 
+                        style={{ 
+                          width: `${percentage}%`,
+                          backgroundColor: factor.color
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="factor-description">
+                    {index === 0 && "Primary driver of churn risk"}
+                    {index === 1 && "Secondary contributing factor"}
+                    {index === 2 && "Significant impact on retention"}
+                    {index === 3 && "Moderate influence on churn"}
+                    {index === 4 && "Minor contributing element"}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
 
         <div className="model-insights">
