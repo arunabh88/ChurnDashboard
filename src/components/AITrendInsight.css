@@ -1,0 +1,44 @@
+.ai-insight-bubble {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #bae6fd;
+  height: 100%;
+}
+
+.insight-header {
+  margin-bottom: 16px;
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0369a1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.insight-content {
+  color: #1a1a1a;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.insight-content p {
+  margin: 0;
+}
+
+.highlight {
+  color: #0369a1;
+  font-weight: 600;
+}
+
+.insight-content strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}

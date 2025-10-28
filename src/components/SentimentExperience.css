@@ -1,0 +1,44 @@
+.sentiment-experience {
+  height: 100%;
+}
+
+.gauge-container {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.word-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.word-tag {
+  background: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1a1a1a;
+  border: 1px solid #e5e7eb;
+}
+
+.ai-insight {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-left: 3px solid #0ea5e9;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #1a1a1a;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ai-insight strong {
+  font-weight: 600;
+}

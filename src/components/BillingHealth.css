@@ -1,0 +1,61 @@
+.billing-health {
+  height: 100%;
+}
+
+.ai-highlight {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border-left: 3px solid #ef4444;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #991b1b;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.ai-highlight strong {
+  font-weight: 600;
+}
+
+.flagged-accounts {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.flagged-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.risk-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.risk-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.risk-btn:hover {
+  border-color: #d1d5db;
+}
+
+.risk-btn.active {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}

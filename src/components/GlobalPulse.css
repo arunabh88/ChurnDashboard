@@ -1,0 +1,50 @@
+.section {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pulse-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.heatmap-container,
+.insight-container {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 300px;
+}
+
+@media (max-width: 1000px) {
+  .pulse-content-grid {
+    grid-template-columns: 1fr;
+  }
+}

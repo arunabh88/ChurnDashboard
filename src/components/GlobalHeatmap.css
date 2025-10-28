@@ -1,0 +1,97 @@
+.heatmap {
+  height: 100%;
+}
+
+.heatmap-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.regions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.region-item {
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+  border-left: 4px solid;
+}
+
+.region-high {
+  border-left-color: #ef4444;
+}
+
+.region-medium {
+  border-left-color: #f59e0b;
+}
+
+.region-low {
+  border-left-color: #10b981;
+}
+
+.region-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.region-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.region-churn {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.risk-bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.risk-fill {
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.risk-high {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+}
+
+.risk-medium {
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+}
+
+.risk-low {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.risk-legend {
+  display: flex;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.legend-color {
+  width: 16px;
+  height: 8px;
+  border-radius: 4px;
+}
