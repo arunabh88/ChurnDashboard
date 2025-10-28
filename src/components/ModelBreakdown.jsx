@@ -113,15 +113,15 @@ function ModelBreakdown() {
           <div className="donut-chart-container">
             <h3 className="chart-title-small">Factor Distribution</h3>
             <div className="donut-wrapper">
-              <ResponsiveContainer width="60%" height={200}>
+              <ResponsiveContainer width="100%" height={260}>
                 <PieChart>
                   <Pie
                     data={pieData}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    outerRadius={60}
-                    innerRadius={40}
+                    outerRadius={85}
+                    innerRadius={55}
                     fill="#8884d8"
                     dataKey="value"
                   >
