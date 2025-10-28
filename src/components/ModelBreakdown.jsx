@@ -1,23 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from 'recharts'
 import './ModelBreakdown.css'
 
 function ModelBreakdown() {
+  const [impactFilter, setImpactFilter] = useState('All')
+  
   const factors = [
-    { factor: 'Engagement Decline', value: 42, color: '#ef4444' },
-    { factor: 'Negative Sentiment', value: 22, color: '#f59e0b' },
-    { factor: 'Billing Issues', value: 15, color: '#3b82f6' },
-    { factor: 'Content Saturation', value: 13, color: '#8b5cf6' },
-    { factor: 'Lack of Re-engagement', value: 8, color: '#10b981' },
+    { factor: 'Engagement Decline', value: 42, color: '#ef4444', impact: 'high' },
+    { factor: 'Negative Sentiment', value: 22, color: '#f59e0b', impact: 'high' },
+    { factor: 'Billing Issues', value: 15, color: '#3b82f6', impact: 'medium' },
+    { factor: 'Content Saturation', value: 13, color: '#8b5cf6', impact: 'medium' },
+    { factor: 'Lack of Re-engagement', value: 8, color: '#10b981', impact: 'low' },
   ]
 
-  const pieData = factors.map(f => ({
+  // Filter factors based on selected impact level
+  const filteredFactors = impactFilter === 'All' 
+    ? factors 
+    : factors.filter(f => f.impact === impactFilter)
+
+  const impactCounts = {
+    all: factors.length,
+    high: factors.filter(f => f.impact === 'high').length,
+    medium: factors.filter(f => f.impact === 'medium').length,
+    low: factors.filter(f => f.impact === 'low').length,
+  }
+
+  const pieData = filteredFactors.map(f => ({
     name: f.factor,
     value: f.value,
     color: f.color
   }))
 
-  const total = factors.reduce((sum, f) => sum + f.value, 0)
+  const total = filteredFactors.reduce((sum, f) => sum + f.value, 0)
 
   return (
     <section className="section model-breakdown">
@@ -28,9 +42,37 @@ function ModelBreakdown() {
 
       <div className="model-content">
         <div className="factors-chart">
-          <h3 className="chart-title">Aggregated Factors</h3>
+          <div className="factors-header">
+            <h3 className="chart-title">Aggregated Factors</h3>
+            <div className="factor-filters">
+              <button 
+                className={`filter-btn ${impactFilter === 'All' ? 'active' : ''}`}
+                onClick={() => setImpactFilter('All')}
+              >
+                All ({impactCounts.all})
+              </button>
+              <button 
+                className={`filter-btn ${impactFilter === 'high' ? 'active' : ''}`}
+                onClick={() => setImpactFilter('high')}
+              >
+                High ({impactCounts.high})
+              </button>
+              <button 
+                className={`filter-btn ${impactFilter === 'medium' ? 'active' : ''}`}
+                onClick={() => setImpactFilter('medium')}
+              >
+                Medium ({impactCounts.medium})
+              </button>
+              <button 
+                className={`filter-btn ${impactFilter === 'low' ? 'active' : ''}`}
+                onClick={() => setImpactFilter('low')}
+              >
+                Low ({impactCounts.low})
+              </button>
+            </div>
+          </div>
           <div className="factor-cards-grid">
-            {factors.map((factor, index) => {
+            {filteredFactors.map((factor, index) => {
               const percentage = (factor.value / 50) * 100
               return (
                 <div key={index} className="factor-card">
@@ -96,7 +138,7 @@ function ModelBreakdown() {
               </div>
             </div>
             <div className="donut-legend">
-              {factors.slice(0, 3).map((item, idx) => (
+              {filteredFactors.slice(0, 3).map((item, idx) => (
                 <div key={idx} className="legend-item-horizontal">
                   <div className="legend-color-box" style={{ backgroundColor: item.color }} />
                   <div className="legend-text">
@@ -116,12 +158,12 @@ function ModelBreakdown() {
             
             <div className="top-factors">
               <p className="factors-title">Top 3 Drivers</p>
-              {factors.slice(0, 3).map((factor, idx) => (
+              {filteredFactors.slice(0, 3).map((factor, idx) => (
                 <div key={idx} className="factor-item">
                   <div className="factor-bar">
                     <div 
                       className="factor-fill" 
-                      style={{ width: `${(factor.value / factors[0].value) * 100}%`, backgroundColor: factor.color }}
+                      style={{ width: `${(factor.value / (filteredFactors[0]?.value || 100)) * 100}%`, backgroundColor: factor.color }}
                     />
                   </div>
                   <span className="factor-name">{factor.factor}</span>
