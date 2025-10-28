@@ -1,5 +1,5 @@
 import React from 'react'
-import { Cell, RadialBarChart, RadialBar, Legend } from 'recharts'
+import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import './SentimentExperience.css'
 
 function SentimentExperience() {
@@ -8,12 +8,21 @@ function SentimentExperience() {
     { name: 'Remaining', value: 38, fill: '#e5e7eb' },
   ]
 
+  const sentimentTrend = [
+    { month: 'Jan', score: 67 },
+    { month: 'Feb', score: 66 },
+    { month: 'Mar', score: 65 },
+    { month: 'Apr', score: 64 },
+    { month: 'May', score: 63 },
+    { month: 'Jun', score: 62 },
+  ]
+
   return (
     <div className="sentiment-experience">
       <h3 className="block-title">C. Sentiment & Service Experience</h3>
       
       <div className="gauge-container">
-        <div style={{ width: '100%', height: '200px' }}>
+        <ResponsiveContainer width="100%" height={220}>
           <RadialBarChart 
             cx="50%" 
             cy="50%" 
@@ -25,9 +34,9 @@ function SentimentExperience() {
           >
             <RadialBar minAngle={15} dataKey="value" cornerRadius={10} />
             <Legend 
-              content={({ payload }) => (
-                <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                  <div style={{ fontSize: '32px', fontWeight: '700', color: '#1a1a1a' }}>
+              content={() => (
+                <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                  <div style={{ fontSize: '36px', fontWeight: '700', color: '#1a1a1a' }}>
                     62%
                   </div>
                   <div style={{ fontSize: '14px', color: '#6b7280', marginTop: '4px' }}>
@@ -40,7 +49,7 @@ function SentimentExperience() {
               )}
             />
           </RadialBarChart>
-        </div>
+        </ResponsiveContainer>
       </div>
 
       <div className="word-cloud">
@@ -49,6 +58,25 @@ function SentimentExperience() {
         <div className="word-tag">Value</div>
         <div className="word-tag">Ads</div>
         <div className="word-tag">Support</div>
+      </div>
+
+      <div className="trend-chart">
+        <p className="trend-label">Sentiment Trend (Last 6 Months)</p>
+        <ResponsiveContainer width="100%" height={120}>
+          <LineChart data={sentimentTrend}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+            <YAxis tick={{ fontSize: 11 }} domain={[55, 70]} />
+            <Tooltip />
+            <Line 
+              type="monotone" 
+              dataKey="score" 
+              stroke="#ef4444" 
+              strokeWidth={2}
+              dot={{ fill: '#ef4444', r: 4 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
 
       <div className="ai-insight">
