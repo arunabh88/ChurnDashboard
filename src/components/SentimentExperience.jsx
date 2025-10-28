@@ -36,39 +36,37 @@ function SentimentExperience() {
         <div className="gauge-section">
           <p className="section-label">Current Sentiment</p>
           <div className="gauge-container">
-            <div className="sentiment-gauge">
-              <svg viewBox="0 0 120 60" style={{ width: '100%', height: 'auto', maxHeight: '160px' }}>
-                {/* Background semicircle */}
-                <path
-                  d="M 20 50 A 40 40 0 0 1 100 50"
-                  fill="none"
-                  stroke="#e5e7eb"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                {/* Value semicircle */}
-                <path
-                  d="M 20 50 A 40 40 0 0 1 100 50"
-                  fill="none"
-                  stroke={sentimentColor}
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                  strokeDasharray={strokeDasharray}
-                  strokeDashoffset={strokeDashoffset}
-                  style={{ transition: 'all 0.3s ease' }}
-                  transform="rotate(-90 60 50)"
-                />
-              </svg>
-              <div className="gauge-content">
-                <div className="gauge-value">{sentimentScore}%</div>
-                <div className="gauge-label">Sentiment Score</div>
-                <div className="gauge-change">↓ 5 pts QoQ</div>
+            <div className="sentiment-display">
+              <div className="metric-cards">
+                <div className="metric-card main-metric">
+                  <div className="metric-value" style={{ color: sentimentColor }}>
+                    {sentimentScore}
+                  </div>
+                  <div className="metric-unit">%</div>
+                  <div className="metric-label">Sentiment Score</div>
+                </div>
+                <div className="metric-indicators">
+                  <div className="indicator">
+                    <div className="indicator-label">Status</div>
+                    <span className={`status-badge status-${sentimentScore >= 70 ? 'positive' : sentimentScore >= 50 ? 'warning' : 'negative'}`}>
+                      {sentimentScore >= 70 ? 'Positive' : sentimentScore >= 50 ? 'Moderate' : 'Critical'}
+                    </span>
+                  </div>
+                  <div className="indicator">
+                    <div className="indicator-label">Trend</div>
+                    <div className="trend-badge">↓ 5 pts QoQ</div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="gauge-status">
-              <span className={`status-badge status-${sentimentScore >= 70 ? 'positive' : sentimentScore >= 50 ? 'warning' : 'negative'}`}>
-                {sentimentScore >= 70 ? 'Positive' : sentimentScore >= 50 ? 'Moderate' : 'Critical'}
-              </span>
+              <div className="sentiment-progress-bar">
+                <div 
+                  className="progress-fill" 
+                  style={{ 
+                    width: `${sentimentScore}%`,
+                    backgroundColor: sentimentColor
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

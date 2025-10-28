@@ -47,25 +47,42 @@ function ModelBreakdown() {
         <div className="model-insights">
           <div className="donut-chart-container">
             <h3 className="chart-title-small">Factor Distribution</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, value }) => `${name}: ${value}%`}
-                  outerRadius={70}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {pieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div className="donut-wrapper">
+              <ResponsiveContainer width="60%" height={200}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={60}
+                    innerRadius={40}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="donut-center-text">
+                <div className="center-value">{total}%</div>
+                <div className="center-label">Total Impact</div>
+              </div>
+            </div>
+            <div className="donut-legend">
+              {factors.slice(0, 3).map((item, idx) => (
+                <div key={idx} className="legend-item-horizontal">
+                  <div className="legend-color-box" style={{ backgroundColor: item.color }} />
+                  <div className="legend-text">
+                    <span className="legend-name">{item.factor}</span>
+                    <span className="legend-value">{item.value}%</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="factor-summary">
